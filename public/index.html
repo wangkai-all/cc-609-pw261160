@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>巡检规则阈值评估 · 人工复核协作台</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>巡检规则阈值评估 · 人工复核协作台</h1>
+    <p class="subtitle">模型仅产出规则分数；阈值标记 → 人工复核 → 补判台账 → 阈值搜索与成本权衡</p>
+  </header>
+
+  <section class="status-panel" aria-live="polite">
+    <div class="status-row">
+      <span class="status-label">操作状态：</span>
+      <span id="status-text" data-evidence-result="status">页面加载中…</span>
+    </div>
+    <div class="status-row" id="config-summary" data-evidence-result="config-summary"></div>
+    <div class="status-row" id="count-summary" data-evidence-result="count-summary"></div>
+  </section>
+
+  <section class="ops-panel">
+    <div class="op-card">
+      <h2>① 运行原阈值评估</h2>
+      <p class="hint">按原阈值（全局范围）评估并留存快照；重复点击会追加新快照，历史结果不覆盖。</p>
+      <button id="btn-run-original" class="primary">运行原阈值评估</button>
+    </div>
+
+    <div class="op-card">
+      <h2>② 补判一条漏报</h2>
+      <p class="hint">仅列出「已查到、原阈值未标记、尚无标签」的候选；补判后按所选适用范围重算。</p>
+      <form id="adj-form">
+        <label>漏报记录
+          <select id="adj-record" required></select>
+        </label>
+        <label>适用范围
+          <select id="adj-scope">
+            <option value="global">全局（global）</option>
+            <option value="region">按区域（region）</option>
+            <option value="type">按设备类型（type）</option>
+            <option value="record">仅该记录（record）</option>
+          </select>
+        </label>
+        <label>范围取值（局部范围自动带出）
+          <input id="adj-scope-value" type="text" readonly placeholder="全局范围无需填写" />
+        </label>
+        <label>判定依据
+          <input id="adj-reason" type="text" required placeholder="例如：现场复检确认接线松动放电" />
+        </label>
+        <button type="submit" class="primary">补判一条漏报</button>
+      </form>
+    </div>
+
+    <div class="op-card">
+      <h2>③ 查看成本权衡</h2>
+      <p class="hint">阈值搜索同时给出「优先减少漏报」与「节约复核工时」两套结果，并附准确率对照。</p>
+      <label>评估范围
+        <select id="trade-scope">
+          <option value="global">全局</option>
+          <option value="region">按区域</option>
+          <option value="type">按设备类型</option>
+        </select>
+      </label>
+      <label>范围取值
+        <input id="trade-scope-value" type="text" placeholder="局部范围必填，如 北区 / 变压器" />
+      </label>
+      <button id="btn-tradeoff" class="primary">查看成本权衡</button>
+    </div>
+  </section>
+
+  <main class="results" data-evidence-result="business-results">
+    <section class="result-card">
+      <h2>最新评估结果</h2>
+      <div id="latest-evaluation" data-evidence-result="latest-evaluation">
+        <p class="empty">尚未运行评估，请点击「运行原阈值评估」。</p>
+      </div>
+    </section>
+
+    <section class="result-card">
+      <h2>成本权衡（两套可比较策略）</h2>
+      <div id="tradeoff" data-evidence-result="tradeoff">
+        <p class="empty">尚未查看成本权衡，请点击「查看成本权衡」。</p>
+      </div>
+    </section>
+
+    <section class="result-card">
+      <h2>评估快照历史（旧结果保留，只追加）</h2>
+      <div id="evaluation-history" data-evidence-result="evaluation-history"></div>
+    </section>
+
+    <section class="result-card">
+      <h2>人工复核与补判台账</h2>
+      <div id="adjudication-ledger" data-evidence-result="adjudication-ledger"></div>
+    </section>
+
+    <section class="result-card">
+      <h2>未查到设备（留存，不参与指标）</h2>
+      <div id="missing-devices" data-evidence-result="missing-devices"></div>
+    </section>
+
+    <section class="result-card wide">
+      <h2>巡检记录明细（随评估与补判联动）</h2>
+      <div id="record-details" data-evidence-result="record-details"></div>
+    </section>
+  </main>
+
+  <footer>
+    <button id="btn-reset" class="ghost">重置本地数据</button>
+    <span class="hint">数据为本机内存中的本地造数，重置后恢复初始状态。</span>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>

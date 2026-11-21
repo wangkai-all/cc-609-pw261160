@@ -1,0 +1,15 @@
+{
+  "name": "inspection-threshold-review",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "巡检规则阈值评估 + 人工复核台账 + 补判与成本权衡（仅 Node.js 内置模块）",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "UNLICENSED"
+}

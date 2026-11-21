@@ -1,0 +1,155 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", system-ui, sans-serif;
+  background: #f4f6fa;
+  color: #1f2937;
+  line-height: 1.55;
+}
+
+.topbar {
+  background: #0f2742;
+  color: #fff;
+  padding: 20px 28px;
+}
+.topbar h1 { margin: 0 0 6px; font-size: 22px; }
+.subtitle { margin: 0; color: #b8c7dd; font-size: 13px; }
+
+.status-panel {
+  margin: 18px 28px 0;
+  background: #fff;
+  border: 1px solid #dde3ee;
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-size: 14px;
+}
+.status-row { margin: 4px 0; }
+.status-label { font-weight: 700; }
+#status-text.ok { color: #0f7b3e; }
+#status-text.error { color: #b42318; font-weight: 600; }
+
+.ops-panel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+  padding: 18px 28px 0;
+}
+.op-card {
+  background: #fff;
+  border: 1px solid #dde3ee;
+  border-radius: 10px;
+  padding: 16px;
+}
+.op-card h2 { margin: 0 0 8px; font-size: 16px; }
+.hint { font-size: 12px; color: #667085; margin: 0 0 10px; }
+
+label { display: block; font-size: 13px; margin: 8px 0; color: #344054; }
+select, input[type="text"] {
+  width: 100%;
+  margin-top: 4px;
+  padding: 7px 9px;
+  border: 1px solid #cbd2e0;
+  border-radius: 6px;
+  font-size: 13px;
+}
+input[readonly] { background: #f2f4f8; color: #556074; }
+
+button {
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 14px;
+  padding: 8px 14px;
+  border: 1px solid transparent;
+}
+button.primary { background: #155eef; color: #fff; }
+button.primary:hover { background: #0b4cc9; }
+button.ghost { background: transparent; border-color: #98a2b3; color: #475467; }
+button:disabled { opacity: .55; cursor: not-allowed; }
+
+.results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  gap: 16px;
+  padding: 18px 28px;
+}
+.result-card {
+  background: #fff;
+  border: 1px solid #dde3ee;
+  border-radius: 10px;
+  padding: 16px;
+  overflow-x: auto;
+}
+.result-card.wide { grid-column: 1 / -1; }
+.result-card h2 { margin: 0 0 10px; font-size: 16px; }
+.empty { color: #98a2b3; font-size: 13px; }
+
+table { border-collapse: collapse; width: 100%; font-size: 12.5px; }
+th, td { border: 1px solid #e3e8f2; padding: 6px 8px; text-align: left; white-space: nowrap; }
+th { background: #f7f9fd; font-weight: 600; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+.badge {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.badge.tp { background: #d1fadf; color: #05603a; }
+.badge.fp { background: #fef0c7; color: #93370d; }
+.badge.fn { background: #fee4e2; color: #b42318; }
+.badge.tn { background: #e9f2fe; color: #1849a9; }
+.badge.unlabeled { background: #eaecf0; color: #475467; }
+.badge.missing { background: #f2f4f7; color: #667085; }
+.badge.scope-global { background: #e9f2fe; color: #1849a9; }
+.badge.scope-region { background: #eef4ff; color: #3538cd; }
+.badge.scope-type { background: #f4ebff; color: #6941c6; }
+.badge.scope-record { background: #ecfdf3; color: #067647; }
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 8px;
+  margin: 10px 0;
+}
+.metric {
+  background: #f7f9fd;
+  border: 1px solid #e3e8f2;
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+.metric .k { font-size: 11px; color: #667085; }
+.metric .v { font-size: 17px; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+.caveats {
+  background: #fffaeb;
+  border: 1px solid #fedf89;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 12px;
+  color: #7a2e0e;
+  margin: 8px 0;
+}
+.caveats ul { margin: 4px 0 0; padding-left: 18px; }
+
+.strategy {
+  border: 1px solid #dde3ee;
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin: 8px 0;
+}
+.strategy.recommend { border-color: #155eef; background: #f5f8ff; }
+.strategy.compare-only { opacity: .92; background: #fafafa; }
+.strategy h3 { margin: 0 0 6px; font-size: 14px; }
+.delta-pos { color: #b42318; font-weight: 600; }
+.delta-neg { color: #0f7b3e; font-weight: 600; }
+.delta-zero { color: #667085; }
+
+footer {
+  padding: 0 28px 36px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
